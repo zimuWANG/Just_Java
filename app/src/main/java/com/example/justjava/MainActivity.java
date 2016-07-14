@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void increment(View view) {
         int numberOfCoffees = 2;
-        numberOfCoffees = 3;
+        numberOfCoffees = numberOfCoffees + 1 ;
         display(numberOfCoffees);
         displayPrice(numberOfCoffees*5);
     }
