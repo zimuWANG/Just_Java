@@ -13,6 +13,8 @@ import java.text.NumberFormat;
  */
 public class MainActivity extends ActionBarActivity {
 
+    int numberOfCoffees = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,20 +25,20 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int numberOfCoffees = 2;
         display(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
+        String priceMessage = "Free";
+        displayMessage(priceMessage);
     }
 
     public void increment(View view) {
-        int numberOfCoffees = 2;
         numberOfCoffees = numberOfCoffees + 1 ;
         display(numberOfCoffees);
         displayPrice(numberOfCoffees*5);
     }
 
     public void decrement(View view) {
-        int numberOfCoffees = 1;
+        numberOfCoffees = numberOfCoffees - 1 ;
         display(numberOfCoffees);
         displayPrice(numberOfCoffees*5);
     }
@@ -57,5 +59,13 @@ public class MainActivity extends ActionBarActivity {
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+    }
+
+    /**
+     * This method displays the given text on the screen.
+     */
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
     }
 }
