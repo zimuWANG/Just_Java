@@ -3,7 +3,9 @@ package com.example.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -25,9 +27,19 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        CheckBox whippedCreamCheckBox =(CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean haswhippedCream = whippedCreamCheckBox.isChecked();
+        Log.v("MainActivity", "Has whipped cream:" + haswhippedCream);
+
+
+        CheckBox chocolateCheckBox =(CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean haschocolate = chocolateCheckBox.isChecked();
+        Log.v("MainActivity", "Has chocolate:" + haschocolate);
+
+
         display(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
-        String priceMessage =   "Name: Kaptain Kunal" +"\n" +"Quantity: " + numberOfCoffees  + "\n"+ "total " + "$ " + numberOfCoffees*5 + "\n" + "Thank you";
+        String priceMessage =   "Name: Kaptain Kunal" +"\n" + "Add whipped cream? " + haswhippedCream + "\nAdd chocolate? " + haschocolate + "\nQuantity: " + numberOfCoffees  + "\n"+ "total " + "$ " + numberOfCoffees*5 + "\n" + "Thank you";
         displayMessage(priceMessage);
     }
 
@@ -43,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
         display(numberOfCoffees);
 
     }
+
 
 
     /**
