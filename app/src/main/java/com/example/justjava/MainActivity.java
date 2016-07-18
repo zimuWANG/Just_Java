@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 
@@ -34,29 +35,37 @@ public class MainActivity extends ActionBarActivity {
 
        //Figure out if the user wants whipped cream
         CheckBox whippedCreamCheckBox =(CheckBox) findViewById(R.id.whipped_cream_checkbox);
-        boolean haswhippedCream = whippedCreamCheckBox.isChecked();
-        Log.v("MainActivity", "Has whipped cream:" + haswhippedCream);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+        Log.v("MainActivity", "Has whipped cream:" + hasWhippedCream);
 
         //Figure out if the user wants chocolate
         CheckBox chocolateCheckBox =(CheckBox) findViewById(R.id.chocolate_checkbox);
-        boolean haschocolate = chocolateCheckBox.isChecked();
-        Log.v("MainActivity", "Has chocolate:" + haschocolate);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+        Log.v("MainActivity", "Has chocolate:" + hasChocolate);
 
 
         display(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
-        String priceMessage =   "Name: " + name +"\n" + "Add whipped cream? " + haswhippedCream + "\nAdd chocolate? " + haschocolate + "\nQuantity: " + numberOfCoffees  + "\n"+ "total " + "$ " + numberOfCoffees*5 + "\n" + "Thank you";
+        String priceMessage =   "Name: " + name +"\n" + "Add whipped cream? " + hasWhippedCream + "\nAdd chocolate? " + hasChocolate + "\nQuantity: " + numberOfCoffees  + "\n"+ "total " + "$ " + numberOfCoffees*calculatePrice(hasWhippedCream,hasChocolate) + "\n" + "Thank you";
         displayMessage(priceMessage);
     }
 
 
 
     public void increment(View view) {
+        if (numberOfCoffees == 100){
+            Toast.makeText(this, "You cannot have more than 100 coffees", Toast.LENGTH_SHORT).show();
+            return;
+        }
         numberOfCoffees = numberOfCoffees + 1 ;
         display(numberOfCoffees);
     }
 
     public void decrement(View view) {
+        if (numberOfCoffees <= 1){
+            Toast.makeText(this, "You cannot have less than 1 coffees", Toast.LENGTH_SHORT).show();
+            return;
+        }
         numberOfCoffees = numberOfCoffees - 1 ;
         display(numberOfCoffees);
 
@@ -87,4 +96,21 @@ public class MainActivity extends ActionBarActivity {
         TextView priceTextView = (TextView) findViewById(R.id.orderSummary_text_view);
         priceTextView.setText(message);
     }
+
+    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
+
+        int basePrice = 5;
+
+        if(hasWhippedCream){
+            basePrice = basePrice + 1;
+        }
+
+        if(hasChocolate){
+            basePrice = basePrice +2;
+        }
+
+        return basePrice;
+    }
+
+
 }
