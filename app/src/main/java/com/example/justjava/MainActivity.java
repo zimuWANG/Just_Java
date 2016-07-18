@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -27,11 +28,16 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+
+        EditText text = (EditText) findViewById(R.id.name_field);
+        String name = text.getText().toString();
+
+       //Figure out if the user wants whipped cream
         CheckBox whippedCreamCheckBox =(CheckBox) findViewById(R.id.whipped_cream_checkbox);
         boolean haswhippedCream = whippedCreamCheckBox.isChecked();
         Log.v("MainActivity", "Has whipped cream:" + haswhippedCream);
 
-
+        //Figure out if the user wants chocolate
         CheckBox chocolateCheckBox =(CheckBox) findViewById(R.id.chocolate_checkbox);
         boolean haschocolate = chocolateCheckBox.isChecked();
         Log.v("MainActivity", "Has chocolate:" + haschocolate);
@@ -39,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
 
         display(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
-        String priceMessage =   "Name: Kaptain Kunal" +"\n" + "Add whipped cream? " + haswhippedCream + "\nAdd chocolate? " + haschocolate + "\nQuantity: " + numberOfCoffees  + "\n"+ "total " + "$ " + numberOfCoffees*5 + "\n" + "Thank you";
+        String priceMessage =   "Name: " + name +"\n" + "Add whipped cream? " + haswhippedCream + "\nAdd chocolate? " + haschocolate + "\nQuantity: " + numberOfCoffees  + "\n"+ "total " + "$ " + numberOfCoffees*5 + "\n" + "Thank you";
         displayMessage(priceMessage);
     }
 
